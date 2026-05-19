@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNI Member Survey — More Value & Support</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-secondary: #5a5a54;
+    --ink-tertiary: #9a9a90;
+    --paper: #f7f5f0;
+    --paper-warm: #ede9e0;
+    --rule: #d8d4c8;
+    --green: #1D9E75;
+    --blue: #378ADD;
+    --coral: #D85A30;
+    --purple: #7F77DD;
+    --gray: #888780;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 48px 32px 80px;
+  }
+
+  header {
+    max-width: 860px;
+    margin: 0 auto 44px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 28px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-tertiary);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--ink-secondary);
+    line-height: 1.65;
+    max-width: 580px;
+    font-weight: 300;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 36px;
+    gap: 0;
+  }
+
+  .tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 12px 26px;
+    border: none;
+    background: transparent;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+  }
+
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--ink); }
+  .tab.active::after { transform: scaleX(1); }
+
+  .panel { display: none; animation: fadeIn 0.2s ease; }
+  .panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Section label */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-tertiary);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  /* Stat grid */
+  .stat-grid {
+    display: flex;
+    gap: 0;
+    margin-bottom: 32px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .stat-card {
+    flex: 1;
+    padding: 16px 20px;
+    border-right: 1px solid var(--rule);
+    background: var(--paper-warm);
+  }
+
+  .stat-card:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--ink-tertiary);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--ink-secondary);
+  }
+
+  .leg-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Chart */
+  .chart-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Note */
+  .note {
+    font-size: 11px;
+    color: var(--ink-tertiary);
+    margin-top: 14px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Key findings */
+  .findings {
+    margin-top: 44px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .findings-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .findings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .finding-card {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+
+  .finding-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .finding-text {
+    font-size: 13px;
+    color: var(--ink-secondary);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .finding-text strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 28px 16px 60px; }
+    .findings-grid { grid-template-columns: 1fr; }
+    .stat-grid { flex-wrap: wrap; }
+    .stat-card { flex: 1 1 40%; border-bottom: 1px solid var(--rule); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Coalition for Networked Information · Member Survey</p>
+  <h1>Where could CNI provide more value or support?</h1>
+  <p class="subtitle">Responses to a multi-select question on areas for improvement, analyzed by respondent role and institutional membership tenure. 180 total responses.</p>
+</header>
+
+<div class="container">
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('role', this)">By role</button>
+    <button class="tab" onclick="switchTab('tenure', this)">By tenure</button>
+  </div>
+
+  <!-- ROLE PANEL -->
+  <div id="panel-role" class="panel active">
+    <p class="section-label">% of respondents selecting each area, by role</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">180</div>
+        <div class="stat-lbl">Total responses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">92</div>
+        <div class="stat-lbl">Dean / senior library leader</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">56</div>
+        <div class="stat-lbl">Assoc dean / dir, digital &amp; IT</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">8</div>
+        <div class="stat-lbl">CIO / senior IT leader</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="leg-swatch" style="background:#1D9E75;"></span>Dean / senior library leader (n=92)</div>
+      <div class="legend-item"><span class="leg-swatch" style="background:#378ADD;"></span>Assoc dean / dir, digital &amp; IT (n=56)</div>
+      <div class="legend-item"><span class="leg-swatch" style="background:#D85A30;"></span>CIO / senior IT leader (n=8)</div>
+    </div>
+
+    <div class="chart-wrap" style="height: 320px;">
+      <canvas id="roleChart" role="img" aria-label="Grouped bar chart: percentage of each role group selecting each value area. Cross-institution collaboration and advocacy are top picks across all roles. CIOs prioritize advocacy at 75%.">
+        Cross-institution collaboration: Dean 57%, Assoc Dean 57%, CIO 50%.
+        Advocacy: Dean 53%, Assoc Dean 55%, CIO 75%.
+        Additional workshops: Dean 41%, Assoc Dean 48%, CIO 13%.
+        Training: Dean 32%, Assoc Dean 34%, CIO 25%.
+        Resources/research publications: Dean 28%, Assoc Dean 34%, CIO 25%.
+      </canvas>
+    </div>
+
+    <p class="note">Roles with fewer than 5 respondents (CTO, Chief Product Officer, VP/President, Other) are excluded from the chart but included in totals. Respondents could select multiple areas.</p>
+  </div>
+
+  <!-- TENURE PANEL -->
+  <div id="panel-tenure" class="panel">
+    <p class="section-label">% of respondents selecting each area, by membership tenure</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">26</div>
+        <div class="stat-lbl">0–5 years</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">24</div>
+        <div class="stat-lbl">6–10 years</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">29</div>
+        <div class="stat-lbl">11–20 years</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">45</div>
+        <div class="stat-lbl">20+ years</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">56</div>
+        <div class="stat-lbl">Not sure</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="leg-swatch" style="background:#1D9E75;"></span>0–5 yrs (n=26)</div>
+      <div class="legend-item"><span class="leg-swatch" style="background:#378ADD;"></span>6–10 yrs (n=24)</div>
+      <div class="legend-item"><span class="leg-swatch" style="background:#D85A30;"></span>11–20 yrs (n=29)</div>
+      <div class="legend-item"><span class="leg-swatch" style="background:#7F77DD;"></span>20+ yrs (n=45)</div>
+      <div class="legend-item"><span class="leg-swatch" style="background:#888780;"></span>Not sure (n=56)</div>
+    </div>
+
+    <div class="chart-wrap" style="height: 360px;">
+      <canvas id="tenureChart" role="img" aria-label="Grouped bar chart: percentage per tenure band selecting each value area. Training interest declines sharply with longer tenure. Resources and research publications grow with tenure.">
+        Cross-institution collaboration: 0-5yrs 65%, 6-10yrs 42%, 11-20yrs 52%, 20+yrs 58%, Not sure 61%.
+        Advocacy: 54%, 46%, 41%, 47%, 62%.
+        Additional workshops: 42%, 58%, 34%, 33%, 39%.
+        Training: 42%, 38%, 24%, 16%, 38%.
+        Resources/publications: 31%, 21%, 24%, 36%, 23%.
+      </canvas>
+    </div>
+
+    <p class="note">Percentages reflect the share of respondents in each tenure band who selected that area. Respondents could select multiple areas.</p>
+  </div>
+
+  <!-- KEY FINDINGS -->
+  <div class="findings">
+    <p class="findings-heading">Key findings</p>
+    <div class="findings-grid">
+      <div class="finding-card">
+        <p class="finding-label" style="color: var(--ink-tertiary);">Across all roles</p>
+        <p class="finding-text"><strong>Cross-institution collaboration and advocacy</strong> are the top two asks for both Deans (57%/53%) and Assoc Deans/Directors in digital &amp; IT roles (57%/55%) — nearly identical priorities.</p>
+      </div>
+      <div class="finding-card">
+        <p class="finding-label" style="color: #D85A30;">CIO outlier</p>
+        <p class="finding-text">CIOs prioritize <strong>advocacy at 75%</strong> — their top ask — while interest in additional workshops drops to just 13%, far below other roles. They want policy influence more than skills-building.</p>
+      </div>
+      <div class="finding-card">
+        <p class="finding-label" style="color: #378ADD;">6–10 year members</p>
+        <p class="finding-text">The <strong>heaviest workshop requesters</strong> of any cohort at 58% — past orientation but still actively building skills and networks. Training also remains high at 38%.</p>
+      </div>
+      <div class="finding-card">
+        <p class="finding-label" style="color: var(--ink-tertiary);">Tenure shift</p>
+        <p class="finding-text">Interest in <strong>training drops sharply</strong> with tenure — from 42% among members with 0–5 years to just 16% among those with 20+ years. Meanwhile, interest in <strong>resources &amp; research publications grows</strong> over the same range, from 31% to 36%, reflecting a gradual shift from skill-building to staying informed.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const areas = [
+    'Cross-institution collaboration',
+    'Advocacy',
+    'Additional workshops',
+    'Training',
+    'Resources & publications'
+  ];
+
+  const textColor = 'rgba(90,90,84,0.8)';
+  const gridColor = 'rgba(0,0,0,0.07)';
+
+  function makeXTicks(labels) {
+    return {
+      color: textColor,
+      font: { size: 12, family: "'DM Sans', sans-serif" },
+      autoSkip: false,
+      maxRotation: 0,
+      minRotation: 0,
+      callback: function(val) {
+        const label = labels[val];
+        if (!label) return '';
+        const words = label.split(' ');
+        const lines = [];
+        let line = '';
+        words.forEach(w => {
+          if ((line + ' ' + w).trim().length > 16) {
+            lines.push(line.trim());
+            line = w;
+          } else {
+            line = (line + ' ' + w).trim();
+          }
+        });
+        if (line) lines.push(line.trim());
+        return lines;
+      }
+    };
+  }
+
+  const sharedOpts = (labels) => ({
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1a1a18',
+        titleColor: '#f7f5f0',
+        bodyColor: 'rgba(247,245,240,0.75)',
+        padding: 10,
+        cornerRadius: 4,
+        callbacks: {
+          label: ctx => '  ' + ctx.dataset.label + ': ' + ctx.parsed.y + '%'
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: makeXTicks(labels),
+        grid: { display: false },
+        border: { display: false }
+      },
+      y: {
+        min: 0,
+        max: 80,
+        ticks: {
+          color: textColor,
+          font: { size: 11, family: "'DM Sans', sans-serif" },
+          callback: v => v + '%',
+          stepSize: 20
+        },
+        grid: { color: gridColor },
+        border: { display: false }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('roleChart'), {
+    type: 'bar',
+    data: {
+      labels: areas,
+      datasets: [
+        { label: 'Dean / library leader',       data: [57,53,41,32,28], backgroundColor: '#1D9E75', borderRadius: 3, borderSkipped: false },
+        { label: 'Assoc dean / dir (digital)',   data: [57,55,48,34,34], backgroundColor: '#378ADD', borderRadius: 3, borderSkipped: false },
+        { label: 'CIO / senior IT leader',       data: [50,75,13,25,25], backgroundColor: '#D85A30', borderRadius: 3, borderSkipped: false },
+      ]
+    },
+    options: sharedOpts(areas)
+  });
+
+  new Chart(document.getElementById('tenureChart'), {
+    type: 'bar',
+    data: {
+      labels: areas,
+      datasets: [
+        { label: '0–5 yrs',   data: [65,54,42,42,31], backgroundColor: '#1D9E75', borderRadius: 3, borderSkipped: false },
+        { label: '6–10 yrs',  data: [42,46,58,38,21], backgroundColor: '#378ADD', borderRadius: 3, borderSkipped: false },
+        { label: '11–20 yrs', data: [52,41,34,24,24], backgroundColor: '#D85A30', borderRadius: 3, borderSkipped: false },
+        { label: '20+ yrs',   data: [58,47,33,16,36], backgroundColor: '#7F77DD', borderRadius: 3, borderSkipped: false },
+        { label: 'Not sure',  data: [61,62,39,38,23], backgroundColor: '#888780', borderRadius: 3, borderSkipped: false },
+      ]
+    },
+    options: sharedOpts(areas)
+  });
+
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
