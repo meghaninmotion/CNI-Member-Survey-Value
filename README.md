@@ -7,4 +7,4 @@ The data are aggregated from 180 responses, which may or may not correspond to m
 
 More details on the organizations can be found at https://www.cni.org/about-cni/membership/members.
 
-This visualization was developed by pairing with Claude AI to develop html to represent a comparison of member perspectives derived from survey feedback. As survey data it is historical data and is also not to be considered comprehensive; rather it is presented for exploration. It can be further developed with your feedback and suggestions. Please share those thoughts - and report errors - as pull requests!
+This visualization was developed by pairing with Claude AI to develop html to represent a comparison of member perspectives derived from survey feedback. As survey data, it is both non-comprehensive historical data. It is presented for exploration and further discussion. It can be further developed with your feedback and suggestions. Please share those thoughts - and report errors - as pull requests!
