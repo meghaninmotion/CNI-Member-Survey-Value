@@ -258,9 +258,9 @@
 <body>
 
 <header>
-  <p class="eyebrow">Coalition for Networked Information · Member Survey</p>
+  <p class="eyebrow">Coalition for Networked Information · Fall 2024 Member Survey</p>
   <h1>Where could CNI provide more value or support?</h1>
-  <p class="subtitle">Responses to a multi-select question on areas for improvement, analyzed by respondent role and institutional membership tenure. 180 total responses.</p>
+  <p class="subtitle">Member organization representatives provided responses to a multi-select question on ways CNI could provide more value and support to members. This data was analyzed thematically by institutional membership tenure, as well as by respondent role.</p>
 </header>
 
 <div class="container">
@@ -362,14 +362,14 @@
 
   <!-- KEY FINDINGS -->
   <div class="findings">
-    <p class="findings-heading">Key findings</p>
+    <p class="findings-heading">Insights</p>
     <div class="findings-grid">
       <div class="finding-card">
         <p class="finding-label" style="color: var(--ink-tertiary);">Across all roles</p>
         <p class="finding-text"><strong>Cross-institution collaboration and advocacy</strong> are the top two asks for both Deans (57%/53%) and Assoc Deans/Directors in digital &amp; IT roles (57%/55%) — nearly identical priorities.</p>
       </div>
       <div class="finding-card">
-        <p class="finding-label" style="color: #D85A30;">CIO outlier</p>
+        <p class="finding-label" style="color: #D85A30;">CIO &amp; senior IT leader outlier</p>
         <p class="finding-text">CIOs prioritize <strong>advocacy at 75%</strong> — their top ask — while interest in additional workshops drops to just 13%, far below other roles. They want policy influence more than skills-building.</p>
       </div>
       <div class="finding-card">
@@ -378,12 +378,19 @@
       </div>
       <div class="finding-card">
         <p class="finding-label" style="color: var(--ink-tertiary);">Tenure shift</p>
-        <p class="finding-text">Interest in <strong>training drops sharply</strong> with tenure — from 42% among members with 0–5 years to just 16% among those with 20+ years. Meanwhile, interest in <strong>resources &amp; research publications grows</strong> over the same range, from 31% to 36%, reflecting a gradual shift from skill-building to staying informed.</p>
+        <p class="finding-text">Interest in <strong>training drops sharply</strong> with tenure — from 42% among members with 0–5 years to just 16% among those with 20+ years.</p>
       </div>
     </div>
   </div>
 
 </div>
+
+  <footer style="max-width:860px; margin:48px auto 0; padding:28px 0 0; border-top:1px solid var(--rule);">
+    <p style="font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-tertiary); margin-bottom:12px;">About this visualization</p>
+    <p style="font-size:12px; color:var(--ink-secondary); line-height:1.75; font-weight:300; margin-bottom:10px;">The data source for this visualization is a member survey administered by the Coalition for Networked Information (CNI). Respondents were asked to select areas where CNI could provide more value or support, and to provide an open-ended response identifying one priority change. The dataset includes 180 responses capturing each respondent's institutional role, membership tenure, selected value areas, and free-text comment.</p>
+    <p style="font-size:12px; color:var(--ink-secondary); line-height:1.75; font-weight:300; margin-bottom:10px;">This visualization was developed with the assistance of Claude AI (Anthropic). The survey data was anonymized, segmented to demonstrate specific relationships, and uploaded directly to Claude with a specific request to demonstrate relationships among common requests by role and by member organization tenure — data captured in the survey. Claude parsed the spreadsheet, grouped respondents by role and tenure band, calculated the percentage of respondents selecting each value area within each group, and visualized patterns across the dataset. Claude generated the interactive HTML file, which presents findings across two views — by role and by tenure — with grouped bar charts, summary stat cards, tooltips on hover, and an insights section. The chart labels, color scheme, and layout were refined iteratively through a collaborative editing process.</p>
+    <p style="font-size:12px; color:var(--ink-secondary); line-height:1.75; font-weight:300;">The file is self-contained and runs in any modern browser. It loads two external resources: Google Fonts (typography) and Chart.js (charting library), both via CDN, so an internet connection is required for those elements to render correctly.</p>
+  </footer>
 
 <script>
   const areas = [
